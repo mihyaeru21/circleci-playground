@@ -1,14 +1,14 @@
 require 'test/unit'
-
-class Hoge
-  def a
-    1
-  end
-end
+require 'net/http'
 
 class TestHoge < Test::Unit::TestCase
-  def test_a
-    assert_equal 1, Hoge.new.a
+  def test_server
+    url = URI.parse('http://localhost:9292')
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.get('/')
+    }
+
+    assert_equal 'hoge', res.body
   end
 end
 

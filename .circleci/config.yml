@@ -11,7 +11,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: bundle install
+          command: bundle install --path vendor/bundle
+      - run:
           name: run tests
-          command: |
-            ruby test.rb
+          command: ./run-test.sh
 
